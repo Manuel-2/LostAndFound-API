@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
 
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
 
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->enum('type', ['Perdido', 'Encontrado']);
             $table->string('title', 100);
             $table->text('description')->nullable();
-            $table->foreignId('location_id')->constrained()->nullable();
+            $table->foreignId('location_id')->nullable()->constrained();
             $table->foreignId('category_id')->constrained();
             $table->date('incident_date');
             $table->timestamps();

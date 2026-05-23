@@ -23,11 +23,11 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => ['in:Perdido,Encontrado'],
+            'type' => ['in:Perdido,Encontrado','required'],
             'title' => ['required'],
             'description' => ['required'],
-            'location_id' => ['in:locations,id'],
-            'category_id' => ['in:cateogries,id', 'required'],
+            'location_id' => ['exists:locations,id'],
+            'category_id' => ['exists:categories,id', 'required'],
             'incident_date' => ['date', 'required'],
         ];
     }

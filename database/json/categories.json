@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Llaves",
+        "description": "Llaves de casa, automóvil, salón, oficina, lockers o llaveros extraviados."
+    },
+    {
+        "name": "Mochilas",
+        "description": "Mochilas escolares, deportivas, de viaje o de laptop."
+    },
+    {
+        "name": "Cuadernos",
+        "description": "Cuadernos, libretas, apuntes, agendas y material escrito."
+    },
+    {
+        "name": "Carteras",
+        "description": "Carteras, billeteras, portafolios pequeños y tarjeteros."
+    },
+    {
+        "name": "Botellas",
+        "description": "Botellas reutilizables, termos y recipientes para bebidas."
+    },
+    {
+        "name": "Telefonos",
+        "description": "Teléfonos celulares, smartphones y teléfonos básicos."
+    },
+    {
+        "name": "Laptops",
+        "description": "Computadoras portátiles, notebooks y ultrabooks."
+    },
+    {
+        "name": "Audifonos",
+        "description": "Audífonos inalámbricos, de cable, headsets y earbuds."
+    },
+    {
+        "name": "Gafetes",
+        "description": "Credenciales universitarias, gafetes de acceso e identificaciones."
+    },
+    {
+        "name": "Tablets",
+        "description": "iPads, tablets Android y dispositivos similares."
+    },
+    {
+        "name": "Cargadores",
+        "description": "Cargadores de laptop, teléfono, tablet y otros dispositivos."
+    },
+    {
+        "name": "Cables",
+        "description": "Cables USB, HDMI, auxiliares, de carga y adaptadores."
+    },
+    {
+        "name": "Memorias USB",
+        "description": "Memorias flash, USBs y dispositivos de almacenamiento portátil."
+    },
+    {
+        "name": "Discos Duros",
+        "description": "Discos duros externos, SSDs portátiles y almacenamiento digital."
+    },
+    {
+        "name": "Calculadoras",
+        "description": "Calculadoras científicas, gráficas y básicas."
+    },
+    {
+        "name": "Libros",
+        "description": "Libros académicos, novelas, manuales y textos impresos."
+    },
+    {
+        "name": "Instrumentos de Escritura",
+        "description": "Plumas, lápices, marcadores, estilógrafos y estuches."
+    },
+    {
+        "name": "Estuches",
+        "description": "Estuches escolares, organizadores y lapiceras."
+    },
+    {
+        "name": "Ropa",
+        "description": "Chamarras, sudaderas, suéteres, gorras y prendas olvidadas."
+    },
+    {
+        "name": "Lentes",
+        "description": "Lentes graduados, de sol y fundas para lentes."
+    },
+    {
+        "name": "Joyeria",
+        "description": "Anillos, pulseras, collares, relojes y accesorios personales."
+    },
+    {
+        "name": "Relojes",
+        "description": "Relojes inteligentes, deportivos o tradicionales."
+    },
+    {
+        "name": "Bolsas",
+        "description": "Bolsas de mano, tote bags, maletas pequeñas y bolsas reutilizables."
+    },
+    {
+        "name": "Documentos",
+        "description": "Documentos oficiales, hojas, certificados y papeles importantes."
+    },
+    {
+        "name": "Tarjetas",
+        "description": "Tarjetas bancarias, de transporte, identificación o membresías."
+    },
+    {
+        "name": "Dinero",
+        "description": "Efectivo encontrado en billetes o monedas."
+    },
+    {
+        "name": "Paraguas",
+        "description": "Paraguas y sombrillas olvidadas."
+    },
+    {
+        "name": "Instrumentos Musicales",
+        "description": "Guitarras, flautas, violines y accesorios musicales."
+    },
+    {
+        "name": "Equipo Deportivo",
+        "description": "Balones, raquetas, guantes y artículos deportivos."
+    },
+    {
+        "name": "Herramientas",
+        "description": "Herramientas pequeñas, kits y equipo técnico."
+    },
+    {
+        "name": "Camara",
+        "description": "Cámaras fotográficas, cámaras deportivas y accesorios."
+    },
+    {
+        "name": "Bicicletas",
+        "description": "Bicicletas, scooters y medios de transporte personal."
+    },
+    {
+        "name": "Casco",
+        "description": "Cascos para bicicleta, motocicleta o seguridad."
+    },
+    {
+        "name": "Medicamentos",
+        "description": "Medicamentos, pastilleros y artículos médicos personales."
+    },
+    {
+        "name": "Cosmeticos",
+        "description": "Maquillaje, productos de higiene y artículos personales."
+    },
+    {
+        "name": "Loncheras",
+        "description": "Loncheras, recipientes de comida y bolsas térmicas."
+    },
+    {
+        "name": "Accesorios Electronicos",
+        "description": "Mouse, teclados, adaptadores, hubs y periféricos."
+    },
+    {
+        "name": "Consolas",
+        "description": "Consolas portátiles, controles y videojuegos."
+    },
+    {
+        "name": "Mascotas",
+        "description": "Mascotas encontradas dentro del campus universitario."
+    },
+    {
+        "name": "Otros",
+        "description": "Objetos perdidos que no encajan en ninguna categoría específica."
+    }
+]

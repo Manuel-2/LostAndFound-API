@@ -26,10 +26,14 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $user = Auth::getUser()->id;
-        dd($user);
         $post = new Post($request->validated());
-        // $post->user_id = ;
+        $post->user_id = $request->user()->id;
+        $post->save();
+
+        return response()->json([
+            'message' => "Publicacion guardada con exito",
+            'data' => $post
+        ], 203);
     }
 
     /**
