@@ -29,6 +29,7 @@ class StorePostRequest extends FormRequest
             'location_id' => ['exists:locations,id'],
             'category_id' => ['exists:categories,id', 'required'],
             'incident_date' => ['date', 'required'],
+            'picture' => ['image'],
         ];
     }
 }

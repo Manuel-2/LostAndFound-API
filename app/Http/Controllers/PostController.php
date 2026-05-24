@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Models\Picture;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -26,14 +27,36 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $post = new Post($request->validated());
+        $post = new Post($request->except(['picture']));
         $post->user_id = $request->user()->id;
         $post->save();
 
+        if ($request->has('picture')) {
+            $file = $request->file('picture');
+            $hash = hash_file('sha256', $file->getRealPath());
+            $ext = $file->extension();
+            $storageName = "{$hash}.{$ext}";
+
+            Picture::create([
+                'post_id' => $post->id,
+                'file_name' => $storageName
+            ]);
+            $file->storePubliclyAs($storageName);
+
+            Storage::disk('public')->putFileAs(
+                'pictures',
+                $file,
+                $storageName
+            );
+        }
+
+        //TODO ahcer picture resource
+        // $post->load('pictures:id');
+
         return response()->json([
             'message' => "Publicacion guardada con exito",
-            'data' => $post
-        ], 203);
+            'data' => $post->toResource()
+        ], 201);
     }
 
     /**
