@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
+use App\Http\Resources\PostResource;
 use App\Models\Picture;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -15,10 +16,11 @@ class PostController extends Controller
      */
     public function index()
     {
+        $posts = Post::query()->latest()->get();
         //TODO: agregar filtros opcionales
 
         return response()->json([
-            'data' => Post::all(),
+            'data' => PostResource::collection($posts),
         ]);
     }
 
@@ -62,9 +64,11 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        //
+        return response()->json([
+            'data' => $post->toResource()
+        ], 200);
     }
 
     /**

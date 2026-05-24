@@ -14,6 +14,13 @@ class PostResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $picture = PictureResource::collection($this->pictures);
+        if($picture){
+            $picture = $picture[0];
+        }else{
+            $picture = null;
+        }
+
         return [
             "id" => 13,
             "user_id" => $this->user->id,
@@ -22,7 +29,7 @@ class PostResource extends JsonResource
             "category" => $this->category,
             "incident_date" => $this->incident_date,
             "type" => $this->type,
-            "picture" => PictureResource::collection($this->pictures),
+            "picture" => $picture,
         ];
     }
 }
