@@ -15,9 +15,9 @@ class PostResource extends JsonResource
     public function toArray(Request $request): array
     {
         $picture = PictureResource::collection($this->pictures);
-        if($picture){
+        if (count($picture)) {
             $picture = $picture[0];
-        }else{
+        } else {
             $picture = null;
         }
 
