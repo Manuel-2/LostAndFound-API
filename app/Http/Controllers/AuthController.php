@@ -19,6 +19,8 @@ class AuthController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if ($user && Hash::check($request->password, $user->password)) {
+            $user->tokens()->delete();
+
             return $user->createToken($user->name)->plainTextToken;
         } else {
             return response()->json([
@@ -27,8 +29,12 @@ class AuthController extends Controller
         }
     }
 
-    public function logout(Request $request){
-        dd("here");
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+        return response()->json([
+            'message' => "Sesión cerrada correctamente."
+        ]);
     }
 
     public function signUp(Request $request)
