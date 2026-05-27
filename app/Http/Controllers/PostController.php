@@ -6,6 +6,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Picture;
 use App\Models\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,10 +15,35 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::query()->latest()->get();
+        $posts = Post::query()->latest();
         //TODO: agregar filtros opcionales
+
+        if ($request->filled("category_id")) {
+            $posts->where("category_id", $request->query('category_id'));
+        }
+
+        if ($request->filled("location_id")) {
+            $posts->where("location_id", $request->query('location_id'));
+        }
+
+
+        if ($request->filled('time')) {
+            $time = strtolower($request->query('time'));
+            $today = Carbon::now();
+            if ($time == 'este mes') {
+                $posts->where('incident_date', ">", $today->subMonth());
+            } else if ($time == "esta semana") {
+                $posts->where('incident_date', ">", $today->subWeek());
+            } else if ($time != "todo") {
+                return response()->json([
+                    'message' => "Tiempo no valido",
+                ], 400);
+            }
+        }
+
+        $posts =  $posts->get();
 
         return response()->json([
             'data' => PostResource::collection($posts),
