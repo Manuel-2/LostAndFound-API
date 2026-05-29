@@ -33,9 +33,11 @@ class PostController extends Controller
             $time = strtolower($request->query('time'));
             $today = Carbon::now();
             if ($time == 'este mes') {
-                $posts->where('incident_date', ">", $today->subMonth());
+                $posts->where('incident_date', ">", $today->subMonth()->toDateString());
             } else if ($time == "esta semana") {
-                $posts->where('incident_date', ">", $today->subWeek());
+                $posts->where('incident_date', ">", $today->subWeek()->toDateString());
+            } else if ($time == 'hoy') {
+                $posts->where('incident_date', $today->toDateString());
             } else if ($time != "todo") {
                 return response()->json([
                     'message' => "Tiempo no valido",
