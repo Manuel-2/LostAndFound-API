@@ -17,6 +17,7 @@ elije la que se este usando o este loaded y abre dicho archivo
 y agrega las siguientes dos lineas:
 
 upload_max_filesize = 50M
+
 post_max_size = 55M
 
 
