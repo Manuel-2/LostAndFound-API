@@ -41,8 +41,6 @@ class RequestController extends Controller
 
     public function store(Request $request)
     {
-        // TODO  validar que no puedan crear petiiciones para sus propias publicaciones
-
         $valid = $request->validate([
             'content' => ['required', 'string'],
             'message' => ['string'],
@@ -105,8 +103,6 @@ class RequestController extends Controller
 
         // notificar al quiene envio la peticion
         $theOneWhoSendIt = $postRequest->user;
-
-
         $type = "Solicitud rechazada";
         if ($accept) {
             $type = "Solicitud aprobada";

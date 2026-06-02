@@ -37,4 +37,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::patch('/requests/{postRequest}/decline', [RequestController::class, 'decline']);
 
     Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::patch('/notifications/{notification}/read', [NotificationController::class, 'read']);
 });
