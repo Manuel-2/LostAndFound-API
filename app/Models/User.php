@@ -13,11 +13,21 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 #[Fillable(['name', 'email', 'password'])]
-#[Hidden(['password', 'remember_token', 'created_at', 'updated_at'])]
+#[Hidden(['password', 'remember_token', 'created_at', 'updated_at', 'email_verified_at'])]
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function requests(): HasMany
+    {
+        return $this->hasMany(Request::class);
+    }
 
     public function posts(): HasMany
     {

@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Models\User;
 
 class PostResource extends JsonResource
 {
@@ -21,9 +22,15 @@ class PostResource extends JsonResource
             $picture = null;
         }
 
+        $user = "Anonimo";
+        if($this->share_my_data){
+            $user = $this->user->toResource();
+        }
+
+
         return [
             "id" => $this->id,
-            "user_id" => $this->user->id,
+            "user" => $user,
             "title" => $this->title,
             "description" => $this->description,
             "category" => $this->category,

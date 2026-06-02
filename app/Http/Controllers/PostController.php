@@ -57,7 +57,8 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $post = new Post($request->except(['picture']));
+        $post = new Post($request->except(['picture','share_my_data']));
+        $post->share_my_data = $request->boolean('share_my_data');
         $post->user_id = $request->user()->id;
         $post->save();
 

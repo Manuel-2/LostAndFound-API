@@ -10,6 +10,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[Guarded([])]
 class Post extends Model
 {
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
+
+    public function requests(): HasMany
+    {
+        return $this->hasMany(Request::class);
+    }
+
+
     public function pictures(): HasMany
     {
         return $this->hasMany(Picture::class);
