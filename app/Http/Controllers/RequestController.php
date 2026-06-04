@@ -85,6 +85,11 @@ class RequestController extends Controller
 
     private function handlePostRequest(PostRequest $postRequest, Request $request, $accept)
     {
+        if ($postRequest->status != 'Pendiente') {
+            return response()->json([
+                'message' => "Esta solicitud ya fue rechazada/aprobada"
+            ], 400);
+        }
         //validar que le pertenesca al usuario;
         $user = $request->user();
         $owner = $postRequest->post->user;
