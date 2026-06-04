@@ -116,7 +116,7 @@
                 <!-- <br> -->
                 <div class="h-flex">
                     <div id='bars-container'>
-                        <x-bar-graphics title="Objetos perdidos por dia de la semana" :chart-data="$objectsPerDayData"></x-bar-graphics>
+                        <x-bar-graphics title="Objetos perdidos esta semana" :chart-data="$objectsPerDayData" indicator=10></x-bar-graphics>
                         <br>
                         <x-bar-graphics title="Publicaciones mensuales" :chart-data='$postPerMonth'></x-bar-graphics>
                     </div>

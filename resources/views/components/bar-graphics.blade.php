@@ -14,6 +14,10 @@
     //TODO: cargar datos
     let ctx = document.getElementById('{{$title}}');
     let data = @json($chartData);
+    let colors = data.data.map(val => (val > {{$indicator}}?'red':'#9ad0f5'));
+    console.log({{$indicator}});
+    console.log(data.data);
+    console.log(colors);
 
 
     new Chart(ctx, {
@@ -23,6 +27,7 @@
         datasets: [{
           label: '{{$title}}',
           data: data.data,
+            backgroundColor: colors,
           borderWidth: 1
         }]
       },

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Location;
 use App\Models\Post;
 use App\Models\User;
 use Carbon\Carbon;
@@ -32,7 +33,7 @@ Route::get('/', function () {
     $postsThatRecieveHelp = Post::query()->has('requests')->count();
 
     $persentageOfPostsHelp = 0;
-    if($totalPostCount != 0){
+    if ($totalPostCount != 0) {
         $persentageOfPostsHelp = $postsThatRecieveHelp * 100 / $totalPostCount;
     }
 
@@ -46,7 +47,7 @@ Route::get('/', function () {
 	    ) as t;
     ")[0]->minutesTime;
 
-    if($avgRetriveTime == null){
+    if ($avgRetriveTime == null) {
         $avgRetriveTime = "Na";
     }
 
@@ -58,7 +59,7 @@ Route::get('/', function () {
         "miércoles" => 0,
         "jueves" => 0,
         "viernes" => 0,
-        "sabado" => 0,
+        "sábado" => 0,
         "domingo" => 0
     ];
 
@@ -77,11 +78,12 @@ Route::get('/', function () {
         12 => 0, // diciembre
     ];
 
-
     $cats = (Category::all()->pluck('name')->toArray());
-    $catsMap = array_fill_keys($cats,0);
+    $catsMap = array_fill_keys($cats, 0);
 
-    Post::all()->map(function ($post) use (&$catsMap, &$daysMap, &$postPerMonth) {
+
+
+    Post::all()->map(function ($post) use (&$catsMap, &$daysMap,  &$postPerMonth) {
         $incidentDate = Carbon::parse($post->incident_date);
         $day = $incidentDate->locale('es')->translatedFormat("l");
         $month = $incidentDate->monthOfYear();
@@ -89,6 +91,7 @@ Route::get('/', function () {
         $postPerMonth[$month]++;
         $catsMap[$post->category->name]++;
     });
+
 
     $categoriesData = [
         'labels' => array_values($cats),

@@ -14,6 +14,7 @@ class BarGraphics extends Component
     public function __construct(
         public array $chartData = [],
         public string $title = "",
+        public int $indicator = 1000,
         public int $width = 900,
         public int $height = 355,
     ) {}
