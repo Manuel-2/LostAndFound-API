@@ -22,6 +22,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return $request->user();
     });
 
+    Route::get('/user/posts', [PostController::class, 'userIndex']);
     Route::get('/categories', [CategoryController::class, 'index']);
     Route::get('/locations', [LocationController::class, 'index']);
 

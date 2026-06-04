@@ -52,6 +52,16 @@ class PostController extends Controller
         ]);
     }
 
+    public function userIndex(Request $request)
+    {
+        $posts = Post::query()->where('user_id', $request->user()->id);
+
+        $posts =  $posts->get();
+
+        return response()->json([
+            'data' => PostResource::collection($posts),
+        ]);
+    }
     /**
      * Store a newly created resource in storage.
      */
