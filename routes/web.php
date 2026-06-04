@@ -47,7 +47,7 @@ Route::get('/', function () {
     ")[0]->minutesTime;
 
     if($avgRetriveTime == null){
-        $avgRetriveTime = "Nan";
+        $avgRetriveTime = "Na";
     }
 
 
@@ -55,7 +55,7 @@ Route::get('/', function () {
     $daysMap = [
         "lunes" => 0,
         "martes" => 0,
-        "miercoles" => 0,
+        "miércoles" => 0,
         "jueves" => 0,
         "viernes" => 0,
         "sabado" => 0,
