@@ -69,7 +69,7 @@ nav {
 
 .h-flex {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .v-flex {
@@ -115,13 +115,11 @@ nav {
 .dashboard-group {
     width: 100%;
     /* margin-bottom: 50px; */
-    padding: 20px;
+    padding: 20px 60px;
     background-color: var(--ligth-gray);
 }
 
-#bars-container {
-
-}
+#bars-container {}
 
 
 .grafic-card {

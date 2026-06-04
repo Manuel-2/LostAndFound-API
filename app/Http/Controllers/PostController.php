@@ -57,7 +57,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $post = new Post($request->except(['picture','share_my_data']));
+        $post = new Post($request->except(['picture', 'share_my_data']));
         $post->share_my_data = $request->boolean('share_my_data');
         $post->user_id = $request->user()->id;
         $post->save();
@@ -98,6 +98,23 @@ class PostController extends Controller
         return response()->json([
             'data' => $post->toResource()
         ], 200);
+    }
+
+    public function complete(Post $post, Request $request)
+    {
+        $owner = $post->user;
+        if ($request->user()->id != $owner->id) {
+            return response()->json([
+                'message' => "Este no es tu post no puedes marcarlo como completado"
+            ], 400);
+        }
+
+        $post->status = "Resuelto";
+        $post->save();
+
+        return response()->json([
+            'message' => "Post marcado como resuelto"
+        ]);
     }
 
     /**

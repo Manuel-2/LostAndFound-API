@@ -1,8 +1,5 @@
 <style>
-    #{{$title}}
-    {
-        width: 340px;
-    }
+
 
     /* .card{ */
       /* padding:10px; */
@@ -14,25 +11,20 @@
 <div class='card grafic-card'>
     <h3>{{$title}}</h3>
     <br>
+  <div style="position: relative; width:500px; height:500px">
     <canvas id='{{$title}}'></canvas>
+  </div>
 </div>
 
 <script>
     (() => {
+    let info = @json($chartData);
+
         const data = {
-            labels: [
-                'Red',
-                'Blue',
-                'Yellow'
-            ],
+            labels: info.labels,
             datasets: [{
-                label: 'My First Dataset',
-                data: [300, 50, 100],
-                backgroundColor: [
-                    'rgb(255, 99, 132)',
-                    'rgb(54, 162, 235)',
-                    'rgb(255, 205, 86)'
-                ],
+                // label: 'Cantidad',
+                data: info.data,
                 hoverOffset: 4
             }]
         };

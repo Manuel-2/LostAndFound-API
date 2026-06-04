@@ -36,7 +36,7 @@
                         <i class="fa-solid fa-circle-user"></i>
                         <div>
                             <p>Usuarios activos</p>
-                            <h3>99</h3>
+                            <h3>{{$userCount}}</h3>
                         </div>
                     </div>
 
@@ -44,7 +44,7 @@
                         <i class="fa-solid fa-inbox"></i>
                         <div>
                             <p>Publicaciones</p>
-                            <h3>99</h3>
+                            <h3>{{$totalPostCount}}</h3>
                         </div>
                     </div>
 
@@ -52,7 +52,7 @@
                         <i class="fa-solid fa-handshake-angle"></i>
                         <div>
                             <p>Porcentaje de publicaciones que reciben ayuda</p>
-                            <h3>12.53 %</h3>
+                            <h3>{{$persentageOfPostsHelp}}</h3>
                         </div>
                     </div>
 
@@ -60,32 +60,32 @@
                         <i class="fa-solid fa-box"></i>
                         <div>
                             <p>Objetos Recuperados</p>
-                            <h3>20</h3>
+                            <h3>{{$objectsRetrived}}</h3>
                         </div>
                     </div>
                     <div class="kpi-card card">
                         <i class="fa-solid fa-hourglass"></i>
                         <div>
                             <p>Tiempo promedio de recuperación</p>
-                            <h3>99.999</h3>
+                            <h3>{{$avgRetriveTime}}</h3>
                         </div>
                     </div>
                 </div>
             </section>
             <section class="dashboard-group">
-                <h2>Graficas</h2>
-                <hr>
-                <br>
+                <!-- <h2>Graficas</h2> -->
+                <!-- <hr> -->
+                <!-- <br> -->
                 <div class="h-flex">
                     <div id='bars-container'>
-                        <x-bar-graphics width='1200' title="Objetos perdidos por dia de la semana" :chart-data="$test"></x-bar-graphics>
+                        <x-bar-graphics title="Objetos perdidos por dia de la semana" :chart-data="$objectsPerDayData"></x-bar-graphics>
                         <br>
-                        <x-bar-graphics title="Publicaciones mensuales" :chart-data="$test"></x-bar-graphics>
+                        <x-bar-graphics title="Publicaciones mensuales" :chart-data='$postPerMonth'></x-bar-graphics>
                     </div>
                     <div>
-                        <x-donut-graphic title="Hola"></x-donut-graphic>
+                        <x-donut-graphic title="Tipos de objetos" :chart-data='$categoriesData'></x-donut-graphic>
                         <br>
-                        <x-donut-graphic title="adios"></x-donut-graphic>
+                        <x-donut-graphic title="Post por ubicacion"></x-donut-graphic>
                     </div>
                 </div>
             </section>

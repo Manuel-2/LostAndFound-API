@@ -13,13 +13,16 @@
   (() => {
     //TODO: cargar datos
     let ctx = document.getElementById('{{$title}}');
+    let data = @json($chartData);
+
+
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue'],
+        labels: data.labels,
         datasets: [{
           label: '{{$title}}',
-          data: [12, 19],
+          data: data.data,
           borderWidth: 1
         }]
       },

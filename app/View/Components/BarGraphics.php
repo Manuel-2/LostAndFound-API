@@ -12,9 +12,9 @@ class BarGraphics extends Component
      * Create a new component instance.
      */
     public function __construct(
-        public array $chartData,
+        public array $chartData = [],
         public string $title = "",
-        public int $width = 1200,
+        public int $width = 900,
         public int $height = 355,
     ) {}
 
