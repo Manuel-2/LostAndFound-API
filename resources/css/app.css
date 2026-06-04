@@ -1,11 +1,135 @@
-@import 'tailwindcss';
+:root {
+    /* variables */
+    --main-blue: #1b3a68;
+    --ligth-gray: #f9fafb;
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+    --dark-1: #1a212b;
+    --dark-2: #2c3440;
+    --dark-3: #77808c;
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --footer-height: 0px;
+}
+
+
+/* .raleway-<uniquifier> { */
+/*     font-family: "Raleway", sans-serif; */
+/*     font-optical-sizing: auto; */
+/*     font-weight: <weight>; */
+/*     font-style: normal; */
+/* } */
+
+html {
+    font-size: 62.5%;
+    /* font-family: raleway-300; */
+    font-family: "Raleway", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: fit-content;
+}
+
+main {
+    min-height: calc(100vh - var(--footer-height));
+    font-size: 1.4rem;
+}
+
+footer {
+    height: var(--footer-height);
+    background-color: var(--main-blue);
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+h4 {
+    font-size: 1.6rem;
+}
+
+nav {
+    width: 100%;
+    max-width: 250px;
+    background-color: var(--main-blue);
+    color: white;
+}
+
+.h-flex {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.v-flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    border-radius: 15px;
+    background-color: white;
+    border: solid 1px rgba(0, 0, 0, 0.1);
+}
+
+.kpi-container {
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.kpi-card {
+    /* box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1); */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 300px;
+    padding: 10px 20px;
+    color: var(--dark-3);
+    min-width: 150px;
+    margin-bottom: 20px;
+}
+
+
+.kpi-card i {
+    color: var(--main-blue);
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.content {
+    width: 100%;
+}
+
+.dashboard-group {
+    width: 100%;
+    /* margin-bottom: 50px; */
+    padding: 20px;
+    background-color: var(--ligth-gray);
+}
+
+#bars-container {
+
+}
+
+
+.grafic-card {
+    padding: 20px 25px;
+}
+
+.grafic-card h3 {
+    color: var(--dark-2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
 }
