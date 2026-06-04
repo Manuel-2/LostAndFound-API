@@ -110,9 +110,10 @@
         </div>
       </section>
       <section class="dashboard-group">
-        <!-- <h2>Graficas</h2> -->
-        <!-- <hr> -->
-        <!-- <br> -->
+        <h2>Graficas</h2>
+        <hr>
+        <br>
+        <br>
         <div class="h-flex">
           <div id='bars-container'>
             <x-bar-graphics title="Objetos perdidos esta semana" :chart-data="$objectsPerDayData" indicator=10></x-bar-graphics>

@@ -143,14 +143,19 @@ Route::get('/', function () {
 	        join categories l on l.id  = p.category_id
 	        group BY l.name
        order by count DESC
-	        limit 1;")[0]->name;
+	        limit 1;");
+    $popularType = count($popularType) > 0 ? $popularType[0]->name : "Na";
+
     $popularLoc = DB::select("
         select l.name ,count(*) as 'count' from posts p
 	        join locations l on l.id  = p.location_id
 	        group BY l.name
        order by count DESC
-	        limit 1;")[0]->name;
-    $pendingRequest = PostRequest::query()->where('status','Pendiente')->get()->count();
+	        limit 1;");
+    $popularLoc = count($popularLoc) > 0 ? $popularLoc[0]->name : "Na";
+
+
+    $pendingRequest = PostRequest::query()->where('status', 'Pendiente')->get()->count();
 
     return view('dashboard', [
         'userCount' => $userCount,

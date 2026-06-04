@@ -16,8 +16,8 @@ return new class extends Migration
             $table->enum('status', ['Pendiente', 'Aprobada', 'Rechazada']);
             $table->text('content');
             $table->text('message')->nullable();
-            $table->foreignId('post_id');
-            $table->foreignId('user_id');
+            $table->foreignId('post_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
 
@@ -30,8 +30,8 @@ return new class extends Migration
                 'Posible coincidencia'
             ]);
             $table->boolean('is_read')->default(false);
-            $table->foreignId('user_id');
-            $table->foreignId('post_id')->nullable();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('post_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
