@@ -70,6 +70,44 @@
                             <h3>{{$avgRetriveTime}}</h3>
                         </div>
                     </div>
+                    <div class="kpi-card card">
+                        <i class="fa-solid fa-question"></i>
+                        <div>
+                            <p>Publicaciones de objetos perdidos</p>
+                            <h3>{{$avgRetriveTime}}</h3>
+                        </div>
+                    </div>
+                    <div class="kpi-card card">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <div>
+                            <p>Publicaciones de objetos encontrados</p>
+                            <h3>{{$avgRetriveTime}}</h3>
+                        </div>
+                    </div>
+                    <div class="kpi-card card">
+                        <i class="fa-solid fa-tag"></i>
+                        <div>
+                            <p>Categoria mas popular</p>
+                            <h3>{{$avgRetriveTime}}</h3>
+                        </div>
+                    </div>
+                    <div class="kpi-card card">
+                        <i class="fa-solid fa-location-arrow"></i>
+                        <div>
+                            <p>Ubicacion mas popular</p>
+                            <h3>{{$avgRetriveTime}}</h3>
+                        </div>
+                    </div>
+                    <div class="kpi-card card">
+                        <i class="fa-solid fa-bell"></i>
+                        <div>
+                            <p>Solicitudes pendientes</p>
+                            <h3>{{$avgRetriveTime}}</h3>
+                        </div>
+                    </div>
+
+
+
                 </div>
             </section>
             <section class="dashboard-group">
@@ -85,7 +123,7 @@
                     <div>
                         <x-donut-graphic title="Tipos de objetos" :chart-data='$categoriesData'></x-donut-graphic>
                         <br>
-                        <x-donut-graphic title="Post por ubicacion"></x-donut-graphic>
+                        <x-donut-graphic title="Publicaciones en ubicaciones mas recurrentes"></x-donut-graphic>
                     </div>
                 </div>
             </section>
