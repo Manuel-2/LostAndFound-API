@@ -40,6 +40,9 @@ class PostRequestResource extends JsonResource
             "title" => $objectName,
             "user_name" => $user_name,
             "time" => $this->created_at->diffForHumans(),
+
+            'content' => $this->content,
+            'message' => $this->message,
         ];
     }
 }
