@@ -7,7 +7,7 @@
 <div class='card grafic-card'>
   <h3>{{$title}}</h3>
   <br>
-  <div style="position: relative; width:500px; height:500px">
+  <div style="position: relative; width:384px; height:384px">
     <canvas id='{{$title}}'></canvas>
   </div>
 </div>

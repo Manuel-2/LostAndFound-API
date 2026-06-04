@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Post;
+use App\Models\Request as PostRequest;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -81,7 +82,16 @@ Route::get('/', function () {
     $cats = (Category::all()->pluck('name')->toArray());
     $catsMap = array_fill_keys($cats, 0);
 
+    $top5Locations = DB::select("
+        select l.name ,count(*) as 'count' from posts p
+	        join locations l on l.id  = p.location_id
+	        group BY l.name
+	        limit 5;");
 
+    $top5LocationsData = [
+        'labels' => array_map(fn($loc) => $loc->name, $top5Locations),
+        'data' => array_map(fn($loc) => $loc->count, $top5Locations),
+    ];
 
     Post::all()->map(function ($post) use (&$catsMap, &$daysMap,  &$postPerMonth) {
         $incidentDate = Carbon::parse($post->incident_date);
@@ -91,6 +101,7 @@ Route::get('/', function () {
         $postPerMonth[$month]++;
         $catsMap[$post->category->name]++;
     });
+
 
 
     $categoriesData = [
@@ -121,7 +132,25 @@ Route::get('/', function () {
         'data' => array_values($postPerMonth),
     ];
 
+    $monthPosts = Post::query()->where('incident_date', '>', Carbon::now()->subMonth())->get();
 
+
+    // otros 4 kpis
+    $lostPosts = Post::query()->where('type', "Perdido")->get()->count();
+    $foundPosts = Post::query()->where('type', "Encontrado")->get()->count();
+    $popularType = DB::select("
+        select l.name ,count(*) as 'count' from posts p
+	        join categories l on l.id  = p.category_id
+	        group BY l.name
+       order by count DESC
+	        limit 1;")[0]->name;
+    $popularLoc = DB::select("
+        select l.name ,count(*) as 'count' from posts p
+	        join locations l on l.id  = p.location_id
+	        group BY l.name
+       order by count DESC
+	        limit 1;")[0]->name;
+    $pendingRequest = PostRequest::query()->where('status','Pendiente')->get()->count();
 
     return view('dashboard', [
         'userCount' => $userCount,
@@ -132,6 +161,12 @@ Route::get('/', function () {
         'objectsPerDayData' => $objectsPerDayData,
         'postPerMonth' => $postPerMonth,
         'categoriesData' => $categoriesData,
+        'top5LocationsData' => $top5LocationsData,
 
+        'lostPosts' => $lostPosts,
+        'foundPosts' => $foundPosts,
+        'popularType' => $popularType,
+        'popularLoc' => $popularLoc,
+        'pendingRequest' => $pendingRequest,
     ]);
 });

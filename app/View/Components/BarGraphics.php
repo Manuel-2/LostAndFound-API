@@ -15,8 +15,9 @@ class BarGraphics extends Component
         public array $chartData = [],
         public string $title = "",
         public int $indicator = 1000,
-        public int $width = 900,
-        public int $height = 355,
+        public string $type = "bar",
+        public int $width = 970,
+        public int $height = 400,
     ) {}
 
     /**

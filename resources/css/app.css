@@ -1,6 +1,6 @@
 :root {
     /* variables */
-    --main-blue: #1b3a68;
+    --main-blue: #2C5EAD;
     --ligth-gray: #f9fafb;
 
     --dark-1: #1a212b;
@@ -34,6 +34,47 @@ body {
     height: fit-content;
 }
 
+nav {
+    width: 280px;
+    padding: 10px;
+    font-size: 2rem;
+    font-weight: bold;
+    border-right: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+nav #logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+nav img {
+    width: 100px;
+}
+
+nav>ul{
+    list-style: none;
+    color: var(--dark-2);
+    cursor: pointer;
+}
+
+nav>ul>li{
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 10px;
+    transition: background-color 260ms;
+}
+
+nav>ul>li:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+header {
+    padding: 20px 60px;
+    color: var(--main-blue);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
 main {
     min-height: calc(100vh - var(--footer-height));
     font-size: 1.4rem;
@@ -60,12 +101,7 @@ h4 {
     font-size: 1.6rem;
 }
 
-nav {
-    width: 100%;
-    max-width: 250px;
-    background-color: var(--main-blue);
-    color: white;
-}
+
 
 .h-flex {
     display: flex;
@@ -96,7 +132,7 @@ nav {
     justify-content: space-evenly;
     width: 300px;
     padding: 10px 20px;
-    color: var(--dark-3);
+    color: var(--dark-1);
     min-width: 150px;
     margin-bottom: 20px;
 }

@@ -21,7 +21,7 @@
 
 
     new Chart(ctx, {
-      type: 'bar',
+      type: '{{$type}}',
       data: {
         labels: data.labels,
         datasets: [{
