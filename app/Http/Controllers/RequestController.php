@@ -27,7 +27,7 @@ class RequestController extends Controller
         $postRequests = $postRequests->get();
 
         return response()->json([
-            'data' => PostRequestResource::collection($postRequests)
+            'data' => PostRequestDetailsResource::collection($postRequests)
         ]);
     }
 
@@ -69,7 +69,7 @@ class RequestController extends Controller
 
         return response()->json([
             'message'  => "Se ha enviado al solicitud.",
-            'data' => $postRequest->toResource(PostRequestResource::class),
+            // 'data' => $postRequest->toResource(PostRequestResource::class),
         ]);
     }
 
