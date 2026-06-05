@@ -38,7 +38,7 @@ class PostRequestDetailsResource extends JsonResource
             "id" => $this->id,
             "type" => $type,
             "status" => $this->status,
-            "post_title" => $objectName,
+            "title" => $objectName,
             "post_id" => $this->post_id,
             'content' => $this->content,
             'message' => $this->message,
