@@ -16,7 +16,7 @@ class PictureResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'url' => env('APP_URL') . "/storage/pictures/$this->file_name"
+            'url' => url("/storage/pictures/$this->file_name")
         ];
     }
 }
