@@ -19,7 +19,7 @@ Route::post('/sign-up', [AuthController::class, 'signUp']);
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::delete('/logout', [AuthController::class, 'logout']);
     Route::get('/user', function (Request $request) {
-        return $request->user();
+        return $request->user()->toResource();
     });
 
     Route::get('/user/posts', [PostController::class, 'userIndex']);
