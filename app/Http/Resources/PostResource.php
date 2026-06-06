@@ -22,11 +22,12 @@ class PostResource extends JsonResource
             $picture = null;
         }
 
+        $yours = $this->user->id == $request->user()->id;
         $user = "Anonimo";
-        if($this->share_my_data){
+        if ($this->share_my_data) {
+
             $user = $this->user->toResource();
         }
-
 
         return [
             "id" => $this->id,
@@ -38,6 +39,7 @@ class PostResource extends JsonResource
             "incident_date" => $this->incident_date,
             "type" => $this->type,
             "picture" => $picture,
+            "yours" => $yours,
         ];
     }
 }
