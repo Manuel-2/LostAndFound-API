@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Resources\PostResource;
+use App\Models\Bookmarks;
 use App\Models\Picture;
 use App\Models\Post;
 use App\Models\Report;
@@ -14,15 +15,41 @@ use Illuminate\Support\Facades\Storage;
 class PostController extends Controller
 {
 
-    public function report(Request $request, Post $post)
+    public function savedPosts(Request $request)
     {
 
+        return response()->json([
+            'data' => PostResource::collection($request->user()->savedPosts)
+        ]);
+    }
+
+    public function createBookmark(Request $request, Post $post)
+    {
+        $bookmark = Bookmarks::query()->where('user_id', $request->user()->id)->where('post_id', $post->id)->first();
+
+        $created = false;
+        if ($bookmark == null) {
+            $bookmark = Bookmarks::create([
+                'user_id' => $request->user()->id,
+                'post_id' => $post->id
+            ]);
+            $created = true;
+        }else{
+            $bookmark->delete();
+        }
+
+        return response()->json([
+            'message' => $created ? 'Post guardado correctamente.' : "Se removio el post de tu lista de guardados."
+        ]);
+    }
+
+    public function report(Request $request, Post $post)
+    {
         $report = Report::create([
             'user_id' => $request->user()->id,
             'post_id' => $post->id,
             'reason' => $request->reason
         ]);
-
 
         return response()->json([
             'message' => "Post denunciado correctamente"
@@ -71,7 +98,7 @@ class PostController extends Controller
 
     public function userIndex(Request $request)
     {
-        $posts = Post::query()->where('user_id', $request->user()->id);
+        $posts = Post::query()->where('user_id', $request->user()->id)->latest();
 
         $posts =  $posts->get();
 
@@ -152,8 +179,18 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post, Request $request)
     {
-        //
+        if ($post->user_id != $request->user()->id) {
+            return response()->json([
+                'message' => "Este post no te pertence"
+            ], 400);
+        }
+
+        $post->delete();
+
+        return response()->json([
+            'message' => "Post eliminado correctamente"
+        ]);
     }
 }

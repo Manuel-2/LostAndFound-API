@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 #[Guarded([])]
 class Post extends Model
 {
+    public function savedByUsers(): BelongsToMany
+    {
+        return $this->BelongsToMany(User::class, 'bookmarks');
+    }
 
     public function notifications(): HasMany
     {

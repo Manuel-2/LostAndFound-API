@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Attributes\Guarded;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class bookmarks extends Model
+#[Guarded([])]
+class Bookmarks extends Model
 {
     public function user(): BelongsTo
     {
