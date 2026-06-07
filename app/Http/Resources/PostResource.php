@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\User;
+use Carbon\Carbon;
 
 class PostResource extends JsonResource
 {
@@ -29,6 +30,7 @@ class PostResource extends JsonResource
             $user = $this->user->toResource();
         }
 
+        Carbon::setLocale('es');
         return [
             "id" => $this->id,
             "hidden_user" => ($user == null),
@@ -38,7 +40,7 @@ class PostResource extends JsonResource
             "category" => $this->category,
             "location" => $this->location,
             // "incident_date" => $this->incident_date,
-            "incident_date" => $this->created_at,
+            "incident_date" => new Carbon($this->created_at)->diffForHumans(),
             "type" => $this->type,
             "picture" => $picture,
             "yours" => $yours,

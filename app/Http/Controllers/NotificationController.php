@@ -12,7 +12,7 @@ class NotificationController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $notificaitons = Notification::query()->where('user_id', $user->id)->get();
+        $notificaitons = Notification::query()->latest()->where('user_id', $user->id)->get();
 
         return response()->json([
             'data' => NotificationResource::collection($notificaitons)
