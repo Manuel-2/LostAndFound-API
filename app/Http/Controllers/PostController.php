@@ -18,7 +18,6 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = Post::query()->latest();
-        //TODO: agregar filtros opcionales
 
         if ($request->filled("category_id")) {
             $posts->where("category_id", $request->query('category_id'));

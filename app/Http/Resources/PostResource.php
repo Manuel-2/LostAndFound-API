@@ -23,14 +23,15 @@ class PostResource extends JsonResource
         }
 
         $yours = $this->user->id == $request->user()->id;
-        $user = "Anonimo";
-        if ($this->share_my_data) {
 
+        $user = null;
+        if ($this->share_my_data) {
             $user = $this->user->toResource();
         }
 
         return [
             "id" => $this->id,
+            "hidden_user" => ($user == null),
             "user" => $user,
             "title" => $this->title,
             "description" => $this->description,
