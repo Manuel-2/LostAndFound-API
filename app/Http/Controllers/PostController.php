@@ -37,7 +37,7 @@ class PostController extends Controller
             } else if ($time == "esta semana") {
                 $posts->where('created_at', ">", $today->subWeek()->toDateString());
             } else if ($time == 'hoy') {
-                $posts->where('created_at', $today->toDateString());
+                $posts->whereDate('created_at', $today->toDateString());
             } else if ($time != "todo el tiempo") {
                 return response()->json([
                     'message' => "Tiempo no valido",
