@@ -6,12 +6,30 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Picture;
 use App\Models\Post;
+use App\Models\Report;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+
+    public function report(Request $request, Post $post)
+    {
+
+        $report = Report::create([
+            'user_id' => $request->user()->id,
+            'post_id' => $post->id,
+            'reason' => $request->reason
+        ]);
+
+
+        return response()->json([
+            'message' => "Post denunciado correctamente"
+        ]);
+    }
+
+
     /**
      * Display a listing of the resource.
      */
