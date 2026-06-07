@@ -66,6 +66,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+
         $post = new Post($request->except(['picture', 'share_my_data']));
         $post->share_my_data = $request->boolean('share_my_data');
         $post->user_id = $request->user()->id;
@@ -77,21 +78,17 @@ class PostController extends Controller
             $ext = $file->extension();
             $storageName = "{$hash}.{$ext}";
 
-            Picture::create([
-                'post_id' => $post->id,
-                'file_name' => $storageName
-            ]);
-            $file->storePubliclyAs($storageName);
-
-            Storage::disk('public')->putFileAs(
+            $path = Storage::disk('s3')->putFileAs(
                 'pictures',
                 $file,
-                $storageName
+                $storageName,
             );
-        }
 
-        //TODO ahcer picture resource
-        // $post->load('pictures:id');
+            Picture::create([
+                'post_id' => $post->id,
+                'file_name' => $path
+            ]);
+        }
 
         return response()->json([
             'message' => "Publicacion guardada con exito",
