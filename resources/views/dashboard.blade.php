@@ -1,38 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout.app')
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard | Lost & Found</title>
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-</head>
 
-<body class="body">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <main class="main h-flex">
-    <nav class="nav">
-      <ul>
-        <li id='logo'>
-          <a>
-            <img src="https://siia.uabcs.mx/semanaposgrado/img/logo-uabcs.png" alt="logo" />
-          </a>
-        </li>
-        <li>Dashboard</li>
-        <li>Moderacion</li>
-        <li>Acerca</li>
-        <li><a href="#">Cerrar Session <i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
-      </ul>
-    </nav>
-    <section class="content">
-      <header>
-        <h1>Dashboard Lost and Found <span> <i class="fa-solid fa-chart-line"></i> </span></h1>
-      </header>
-      <section class="dashboard-group" id="kpis">
+@section('title','Dashboard')
+
+@section('content')
+<section class="dashboard-group" id="kpis">
         <div class="kpi-container">
           <div class="kpi-card card">
             <i class="fa-solid fa-circle-user"></i>
@@ -115,15 +87,13 @@
         <br>
         <br>
         <div id="graphics">
-            <x-bar-graphics title="Objetos perdidos esta semana" :chart-data="$objectsPerDayData" indicator=9></x-bar-graphics>
-            <x-donut-graphic title="Tipos de objetos" :chart-data='$categoriesData'></x-donut-graphic>
-            <x-bar-graphics title="Publicaciones mensuales" :chart-data='$postPerMonth'></x-bar-graphics>
-            <x-donut-graphic title="Distribución top 5 ubicaciones más recurrentes" :chart-data='$top5LocationsData'></x-donut-graphic>
-          </div>
+          <x-bar-graphics title="Objetos perdidos esta semana" :chart-data="$objectsPerDayData" indicator=9></x-bar-graphics>
+          <x-donut-graphic title="Tipos de objetos" :chart-data='$categoriesData'></x-donut-graphic>
+          <x-bar-graphics title="Publicaciones mensuales" :chart-data='$postPerMonth'></x-bar-graphics>
+          <x-donut-graphic title="Distribución top 5 ubicaciones más recurrentes" :chart-data='$top5LocationsData'></x-donut-graphic>
+        </div>
         </div>
       </section>
     </section>
-  </main>
-</body>
 
-</html>
+@endsection

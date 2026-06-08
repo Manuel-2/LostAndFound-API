@@ -36,6 +36,7 @@ a {
 
 body {
     height: fit-content;
+    background-color: var(--ligth-gray);
 }
 
 nav {
@@ -45,12 +46,36 @@ nav {
     font-weight: bold;
     border-right: 2px solid rgba(0, 0, 0, 0.1);
     position: relative;
+    background-color: white;
+}
+
+.nav>ul>li>a {
+    color: var(--main-blue);
+    text-decoration: none;
+    user-select: none;
+    cursor: pointer;
+}
+
+
+.nav>ul>li>a:hover {
+    text-decoration: underline;
 }
 
 nav #logo {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+nav #logo a {
+    width: 100%;
+    text-align: center;
+    color: var(--main-blue);
+}
+
+nav #logo i {
+    color: var(--main-blue);
+    font-size: 6rem;
 }
 
 nav img {
@@ -60,7 +85,6 @@ nav img {
 nav>ul {
     list-style: none;
     color: var(--dark-2);
-    cursor: pointer;
     position: sticky;
     top: 10px;
 }
@@ -72,14 +96,15 @@ nav>ul>li {
     transition: background-color 260ms;
 }
 
-nav>ul>li:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
+/* nav>ul>li:hover { */
+/*     background-color: rgba(0, 0, 0, 0.1); */
+/* } */
 
 header {
     padding: 20px 60px;
     color: var(--main-blue);
     border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    background-color: white;
 }
 
 main {
@@ -194,4 +219,36 @@ h4 {
     color: var(--dark-2);
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
+}
+
+.table-spacious {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.6;
+}
+
+.table-spacious thead th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1.8rem;
+    letter-spacing: 0.5px;
+    color: #555;
+    /* Thick bottom border for a strong header separation */
+    border-bottom: 2px solid #333;
+}
+
+.table-spacious th,
+.table-spacious td {
+    text-align: left;
+    /* The key property: generous padding */
+    padding: 20px 20px;
+    /* Subtle bottom border for row separation */
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Removes the border from the very last row for a cleaner end */
+.table-spacious tbody tr:last-child td {
+    border-bottom: none;
 }

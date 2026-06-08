@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Resources\UserResource;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -35,4 +38,31 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])
         ->name('dashboard');
 
+
+    Route::get('/users', function (Request $request) {
+        $users = UserResource::collection(User::all());
+        return view('Users', [
+            'users' => $users,
+        ]);
+    });
+
+    Route::get('/posts', function (Request $request) {
+        $posts = Post::query()->with([
+            'user',
+            'location',
+            'category',
+            'category',
+            'pictures',
+        ])->latest()->get();
+
+        $posts = collect($posts)
+            ->map(function ($post) {
+                $post->pictures = $post->pictures->first()?->file_name;
+                return $post;
+            });
+
+        return view('Posts', [
+            'posts' => $posts,
+        ]);
+    });
 });
