@@ -41,7 +41,7 @@
             <i class="fa-solid fa-hourglass"></i>
             <div>
               <p>Tiempo promedio de recuperación</p>
-              <h3>{{$avgRetriveTime}}</h3>
+              <h3>{{$avgRetriveTime}} horas</h3>
             </div>
           </div>
           <div class="kpi-card card">

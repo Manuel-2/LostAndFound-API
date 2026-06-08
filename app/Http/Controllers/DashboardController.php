@@ -32,7 +32,7 @@ class DashboardController extends Controller
         $objectsRetrived = Post::query()->where('status', 'Resuelto')->count();
 
         $avgRetriveTime = DB::select(" select avg(m) as minutesTime from
-	    (SELECT TIMESTAMPDIFF(Minute,p.created_at ,p.updated_at ) as m from posts p
+	    (SELECT TIMESTAMPDIFF(HOUR,p.created_at ,p.updated_at ) as m from posts p
 			where p.status = 'Resuelto'
 	    ) as t;
     ")[0]->minutesTime;
