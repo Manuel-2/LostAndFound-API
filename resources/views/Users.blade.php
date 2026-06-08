@@ -19,7 +19,7 @@
             <tr>
                 <td>
                     {!! $user->picture
-                    ? '<img src="'.Storage::disk('s3')->url($user->pictures).'" alt="x" style="width: 100px;">'
+                    ? '<img src="'.Storage::disk('s3')->url($user->picture).'" alt="x" style="width: 100px;">'
                     : '-'
                     !!}
 
