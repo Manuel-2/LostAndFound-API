@@ -83,7 +83,7 @@ class DashboardController extends Controller
         ];
 
         Post::all()->map(function ($post) use (&$catsMap, &$daysMap,  &$postPerMonth) {
-            $incidentDate = Carbon::parse($post->incident_date);
+            $incidentDate = Carbon::parse($post->created_at);
             $day = $incidentDate->locale('es')->translatedFormat("l");
             $month = $incidentDate->monthOfYear();
             $daysMap[$day]++;
@@ -120,9 +120,6 @@ class DashboardController extends Controller
             ],
             'data' => array_values($postPerMonth),
         ];
-
-        $monthPosts = Post::query()->where('incident_date', '>', Carbon::now()->subMonth())->get();
-
 
         // otros 4 kpis
         $lostPosts = Post::query()->where('type', "Perdido")->get()->count();

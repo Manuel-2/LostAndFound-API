@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Resources\PostResource;
+use App\Mail\KpiAlert;
 use App\Models\Bookmarks;
 use App\Models\Picture;
 use App\Models\Post;
 use App\Models\Report;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -126,7 +129,6 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-
         $post = new Post($request->except(['picture', 'share_my_data']));
         $post->share_my_data = $request->boolean('share_my_data');
         $post->user_id = $request->user()->id;
@@ -149,6 +151,17 @@ class PostController extends Controller
                 'file_name' => $path
             ]);
         }
+
+
+        $createdPostsToday = Post::query()->whereDate('created_at', Carbon::now())->count();
+        if ($createdPostsToday == 10) {
+            $admins = User::with('roles')->get()->filter(
+                fn($user) => $user->roles->where('name', 'admin')->toArray()
+            )->pluck('email');
+
+            Mail::to($admins)->send(new KpiAlert(Carbon::now()->toDateString()));
+        }
+
 
         return response()->json([
             'message' => "Publicacion guardada con exito",
