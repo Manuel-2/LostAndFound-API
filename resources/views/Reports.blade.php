@@ -34,14 +34,14 @@
                 <td>{{$report->reason}}</td>
                 <td>
                     <form method="post" action="/reports/delete">
-                        <input type="submit" value="X" style="background-color: red; border-radius: 15px; font-size: 40px;color:white; border: none;padding:5px 20px;cursor: pointer;">
+                        <input type="submit" value="X" style="background-color: red; border-radius: 5px; font-size: 20px;color:white; border: none;padding:5px 20px;cursor: pointer;">
                         <input type="hidden" name="report_id" value="{{$report->id}}">
                         <input type="hidden" name="post_id" value="{{$report->post->id}}">
                     </form>
                 </td>
                 <td>
                     <form method="post" action="/reports/ignore">
-                        <input type="submit" value="ok" style="background-color: green; border-radius: 15px; font-size: 40px;color:white; border: none;padding:5px 20px;cursor: pointer;">
+                        <input type="submit" value="ok" style="background-color: green; border-radius: 5px; font-size: 20px;color:white; border: none;padding:5px 20px;cursor: pointer;">
                         <input type="hidden" name="report_id" value="{{$report->id}}">
                         <input type="hidden" name="post_id" value="{{$report->post->id}}">
                     </form>
