@@ -76,7 +76,7 @@ class PostController extends Controller
             'savedByUsers as bookmarked' => function ($query) use ($request) {
                 $query->where('user_id', $request->user()->id);
             }
-        ])->latest();
+        ])->where('status','!=','Resuelto')->latest();
 
         if ($request->filled("category_id")) {
             $posts->where("category_id", $request->query('category_id'));
