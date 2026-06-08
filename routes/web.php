@@ -57,7 +57,9 @@ Route::middleware('auth:sanctum')->group(function () {
         ])->latest()->get();
 
 
+
         $reports = $reports->each(function ($report) {
+            dd($report);
             $report->post?->setAttribute(
                 'pictures',
                 $report->post->pictures->first()?->file_name
