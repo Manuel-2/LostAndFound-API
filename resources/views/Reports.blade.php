@@ -11,7 +11,7 @@
                 <th>Titulo publicacion</th>
                 <th>Descripcion publicacion</th>
                 <th>Usuario publicacion</th>
-                <th>Usuario que reproto</th>
+                <th>Usuario que reporto</th>
                 <th>Motivo de reporte</th>
                 <th>Eliminar publicacion</th>
                 <th>Ignorar reporte</th>
