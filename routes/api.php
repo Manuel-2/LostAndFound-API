@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/posts', [PostController::class, 'index']);
     Route::post('/posts', [PostController::class, 'store']);
     Route::get('/posts/{post}', [PostController::class, 'show']);
+    Route::patch('/posts/{post}', [PostController::class, 'update']);
     Route::delete('/posts/{post}', [PostController::class, 'destroy']);
     Route::patch('/posts/{post}/complete', [PostController::class, 'complete']);
     Route::post('/posts/{post}/bookmark', [PostController::class, 'createBookmark']);

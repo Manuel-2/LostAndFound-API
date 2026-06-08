@@ -76,7 +76,7 @@ class PostController extends Controller
             'savedByUsers as bookmarked' => function ($query) use ($request) {
                 $query->where('user_id', $request->user()->id);
             }
-        ])->where('status','!=','Resuelto')->latest();
+        ])->where('status', '!=', 'Resuelto')->latest();
 
         if ($request->filled("category_id")) {
             $posts->where("category_id", $request->query('category_id'));
@@ -186,10 +186,9 @@ class PostController extends Controller
 
     public function complete(Post $post, Request $request)
     {
-        $owner = $post->user;
-        if ($request->user()->id != $owner->id) {
+        if ($post->user_id != $request->user()->id) {
             return response()->json([
-                'message' => "Este no es tu post no puedes marcarlo como completado"
+                'message' => "Este post no te pertence"
             ], 400);
         }
 
@@ -204,9 +203,43 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        if ($post->user_id != $request->user()->id) {
+            return response()->json([
+                'message' => "Este post no te pertence"
+            ], 400);
+        }
+
+
+        if ($request->has('picture')) {
+            $file = $request->file('picture');
+            $hash = hash_file('sha256', $file->getRealPath());
+            $ext = $file->extension();
+            $storageName = "{$hash}.{$ext}";
+
+            $path = Storage::disk('s3')->putFileAs(
+                'pictures',
+                $file,
+                $storageName,
+            );
+
+            Picture::create([
+                'post_id' => $post->id,
+                'file_name' => $path
+            ]);
+        }
+
+        $post->update($request->except(['picture', 'share_my_data']));
+        $post->share_my_data = $request->boolean('share_my_data');
+        $post->user_id = $request->user()->id;
+        $post->save();
+
+
+         return response()->json([
+            'message' => "Publicacion editada",
+            'data' => $post->toResource(),
+        ]);
     }
 
     /**
