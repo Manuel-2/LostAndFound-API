@@ -44,6 +44,7 @@ class PostResource extends JsonResource
             "type" => $this->type,
             "picture" => $picture,
             "yours" => $yours,
+            "bookmarked" => $this->bookmarked,
         ];
     }
 }

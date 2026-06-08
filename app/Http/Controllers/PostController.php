@@ -17,6 +17,11 @@ class PostController extends Controller
 
     public function savedPosts(Request $request)
     {
+        $request->user()->savedPosts->loadExists([
+            'bookmarks as bookmarked' => fn($query) =>
+            $query->where('user_id', $request->user()->id)
+        ]);
+
 
         return response()->json([
             'data' => PostResource::collection($request->user()->savedPosts)
@@ -34,12 +39,14 @@ class PostController extends Controller
                 'post_id' => $post->id
             ]);
             $created = true;
-        }else{
+        } else {
             $bookmark->delete();
         }
 
+
         return response()->json([
-            'message' => $created ? 'Post guardado correctamente.' : "Se removio el post de tu lista de guardados."
+            'message' => $created ? 'Post guardado correctamente.' : "Se removio el post de tu lista de guardados.",
+            'bookmarked' => $created
         ]);
     }
 
@@ -62,7 +69,11 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::query()->latest();
+        $posts = Post::query()->withExists([
+            'savedByUsers as bookmarked' => function ($query) use ($request) {
+                $query->where('user_id', $request->user()->id);
+            }
+        ])->latest();
 
         if ($request->filled("category_id")) {
             $posts->where("category_id", $request->query('category_id'));
@@ -98,7 +109,11 @@ class PostController extends Controller
 
     public function userIndex(Request $request)
     {
-        $posts = Post::query()->where('user_id', $request->user()->id)->latest();
+        $posts = Post::query()->where('user_id', $request->user()->id)->withExists([
+            'savedByUsers as bookmarked' => function ($query) use ($request) {
+                $query->where('user_id', $request->user()->id);
+            }
+        ])->latest();
 
         $posts =  $posts->get();
 
@@ -144,8 +159,13 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(Post $post, Request $request)
     {
+        $post->loadExists([
+            'bookmarks as bookmarked' => fn($query) =>
+            $query->where('user_id', $request->user()->id)
+        ]);
+
         return response()->json([
             'data' => $post->toResource()
         ], 200);
