@@ -28,7 +28,7 @@
             </h2>
             @if(session('message'))
             <div>
-                <p> {{session('message')}}</p>
+                <h4> {{session('message')}}</h4>
             </div>
             @endif
             <hr>
