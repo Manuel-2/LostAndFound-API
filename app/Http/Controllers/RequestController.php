@@ -43,7 +43,6 @@ class RequestController extends Controller
     {
         $valid = $request->validate([
             'content' => ['required', 'string'],
-            'message' => ['string'],
             'post_id' => ['required', 'exists:posts,id'],
         ]);
 
