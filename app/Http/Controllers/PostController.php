@@ -25,7 +25,7 @@ class PostController extends Controller
             $query->where('user_id', $request->user()->id),
             'requests as already_requested' => function ($query) use ($request) {
                 $query->where('user_id', $request->user()->id);
-                $query->where('status', 'Pendiente');
+                $query->where('status', 'Rechazada');
             }
         ]);
 
@@ -82,7 +82,7 @@ class PostController extends Controller
             },
             'requests as already_requested' => function ($query) use ($request) {
                 $query->where('user_id', $request->user()->id);
-                $query->where('status', 'Pendiente');
+                $query->where('status', 'Rechazada');
             }
         ])->where('status', '!=', 'Resuelto')->latest();
 
@@ -126,7 +126,7 @@ class PostController extends Controller
             },
             'requests as already_requested' => function ($query) use ($request) {
                 $query->where('user_id', $request->user()->id);
-                $query->where('status', 'Pendiente');
+                $query->where('status',"!=", 'Rechazada');
             }
         ])->latest();
 
@@ -191,7 +191,7 @@ class PostController extends Controller
             $query->where('user_id', $request->user()->id),
             'requests as already_requested' => function ($query) use ($request) {
                 $query->where('user_id', $request->user()->id);
-                $query->where('status', 'Pendiente');
+                $query->where('status', 'Rechazada');
             }
         ]);
 
