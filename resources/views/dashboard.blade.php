@@ -32,8 +32,8 @@
       <header>
         <h1>Dashboard Lost and Found <span> <i class="fa-solid fa-chart-line"></i> </span></h1>
       </header>
-      <section class="dashboard-group">
-        <div class="h-flex kpi-container">
+      <section class="dashboard-group" id="kpis">
+        <div class="kpi-container">
           <div class="kpi-card card">
             <i class="fa-solid fa-circle-user"></i>
             <div>
@@ -114,16 +114,10 @@
         <hr>
         <br>
         <br>
-        <div class="h-flex">
-          <div id='bars-container'>
+        <div id="graphics">
             <x-bar-graphics title="Objetos perdidos esta semana" :chart-data="$objectsPerDayData" indicator=9></x-bar-graphics>
-            <br>
-            <x-bar-graphics title="Publicaciones mensuales" :chart-data='$postPerMonth'></x-bar-graphics>
-            <br>
-          </div>
-          <div>
             <x-donut-graphic title="Tipos de objetos" :chart-data='$categoriesData'></x-donut-graphic>
-            <br>
+            <x-bar-graphics title="Publicaciones mensuales" :chart-data='$postPerMonth'></x-bar-graphics>
             <x-donut-graphic title="Distribución top 5 ubicaciones más recurrentes" :chart-data='$top5LocationsData'></x-donut-graphic>
           </div>
         </div>
