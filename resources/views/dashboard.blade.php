@@ -87,7 +87,7 @@
         <br>
         <br>
         <div id="graphics">
-          <x-bar-graphics title="Objetos perdidos esta semana" :chart-data="$objectsPerDayData" indicator=9></x-bar-graphics>
+          <x-bar-graphics title="Objetos perdidos por dia de la semana" :chart-data="$objectsPerDayData" indicator=9></x-bar-graphics>
           <x-donut-graphic title="Tipos de objetos" :chart-data='$categoriesData'></x-donut-graphic>
           <x-bar-graphics title="Publicaciones mensuales" :chart-data='$postPerMonth'></x-bar-graphics>
           <x-donut-graphic title="Distribución top 5 ubicaciones más recurrentes" :chart-data='$top5LocationsData'></x-donut-graphic>
