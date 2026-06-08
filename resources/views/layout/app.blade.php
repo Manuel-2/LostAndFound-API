@@ -28,11 +28,10 @@
                     </a>
                 </li>
                 <li><a href="/dashboard">Dahsboard</a></li>
-                <li><a href="#">Moderation</a></li>
+                <li><a href="/reports">Moderation</a></li>
                 <li><a href="/users">Usuarios</a></li>
                 <li><a href="/posts">Publicaciones</a></li>
-                <li><a href="#">Acerca</a></li>
-                <li><a href="#">Cerrar Sesión</a></li>
+                <li><a href="/logout">Cerrar Sesión</a></li>
             </ul>
         </nav>
 

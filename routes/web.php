@@ -4,9 +4,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Resources\UserResource;
 use App\Models\Post;
+use App\Models\Report;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Support\Facades\Auth;
 
 Route::redirect('/', '/dashboard');
 
@@ -44,6 +46,46 @@ Route::middleware('auth:sanctum')->group(function () {
         return view('Users', [
             'users' => $users,
         ]);
+    });
+
+    Route::get('/reports', function (Request $request) {
+        $reports = Report::with([
+            'user',
+            'post',
+            'post.user',
+            'post.pictures',
+        ])->latest()->get();
+
+
+        $reports = $reports->each(function ($report) {
+            $report->post?->setAttribute(
+                'pictures',
+                $report->post->pictures->first()?->file_name
+            );
+        });
+
+        return view('Reports', [
+            'reports' => $reports
+        ]);
+    });
+
+    Route::post('reports/delete', function (Request $request) {
+        Post::find($request->post_id)->delete();
+        return back();
+    });
+
+    Route::post('reports/ignore', function (Request $request) {
+        Report::find($request->report_id)->delete();
+        return back();
+    });
+
+    Route::get('/logout', function (Request $request) {
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     });
 
     Route::get('/posts', function (Request $request) {
