@@ -29,8 +29,11 @@ class PostResource extends JsonResource
         if ($this->share_my_data) {
             $user = $this->user->toResource();
         }
-        $aceptedRequest = $this->requests()->where('user_id', $request->user()->id)->where("status","!=", "Rechazada")->get();
+        $aceptedRequest = $this->requests()->where('user_id', $request->user()->id)->where("status", "!=", "Rechazada")->get();
         if (count($aceptedRequest) > 0) {
+            $user = $this->user->toResource();
+        }
+        if ($yours) {
             $user = $this->user->toResource();
         }
 
