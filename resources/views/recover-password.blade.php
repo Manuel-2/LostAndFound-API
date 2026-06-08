@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css'])
     @vite(['resources/css/login.css'])
-    <title>Login| Lost & found - Administradción</title>
+    <title>Recuperar contraseña| Lost & found - Administradción</title>
 </head>
 
 <body
@@ -22,30 +22,26 @@
         <div class="card kpi-card">
             <h1>Lost and Found</h1>
             <h2 style="text-align: center;">
-                Iniciar sesion
+                Recuperar contraseña
                 <br>
-                <i class="fa-solid fa-user-lock" style="font-size: 3rem;"></i>
+                <i class="fa-solid fa-key"></i>
             </h2>
-            @if(session('error'))
-            <h4>{{ session('error') }}</h4>
+            @if(session('message'))
+            <div>
+                <p> {{session('message')}}</p>
+            </div>
             @endif
-
             <hr>
             <br>
-            <form method="post" action="/login">
+            <form method="post" action="/recover">
                 @csrf
                 <label>
                     <p>Correo</p>
                     <input type="email" name="email">
                 </label>
-
-                <label>
-                    <p>Contraseña</p>
-                    <input type="password" name="password">
-                </label>
-                <input id="send" type="submit" value="Iniciar session"></input>
+                <input id="send" type="submit" value="Enviar Correo de recuperacion"></input>
             </form>
-            <a href='/recover'>Recuperar contraseña</a>
+            <a href='/login'>Login</a>
         </div>
     </div>
     <div>

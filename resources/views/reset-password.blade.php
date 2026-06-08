@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css'])
     @vite(['resources/css/login.css'])
-    <title>Login| Lost & found - Administradción</title>
+    <title>Actualizar contraseña | Lost & found - Administradción</title>
 </head>
 
 <body
@@ -22,30 +22,42 @@
         <div class="card kpi-card">
             <h1>Lost and Found</h1>
             <h2 style="text-align: center;">
-                Iniciar sesion
+                Actualizar Contraseña
                 <br>
-                <i class="fa-solid fa-user-lock" style="font-size: 3rem;"></i>
-            </h2>
-            @if(session('error'))
-            <h4>{{ session('error') }}</h4>
-            @endif
 
+            </h2>
             <hr>
+            @if(session('message'))
+            <div>
+                <p> {{session('message')}}</p>
+            </div>
+            @endif
             <br>
-            <form method="post" action="/login">
+            <form method="post" action="/password-update">
                 @csrf
                 <label>
                     <p>Correo</p>
-                    <input type="email" name="email">
+                    <input type="email" name="email" value="{{$email}}">
                 </label>
 
                 <label>
                     <p>Contraseña</p>
                     <input type="password" name="password">
                 </label>
-                <input id="send" type="submit" value="Iniciar session"></input>
+
+                <label>
+                    <p>Confirmar Contraseña</p>
+                    <input type="password" name="password_confirmation">
+                </label>
+
+                <input
+                    type="hidden"
+                    name="token"
+                    value="{{ $token }}">
+
+                <input id="send" type="submit" value="Actualizar contraseña"></input>
             </form>
-            <a href='/recover'>Recuperar contraseña</a>
+            <a href='/login'>Login</a>
         </div>
     </div>
     <div>
