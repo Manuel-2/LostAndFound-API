@@ -22,7 +22,11 @@ class PostController extends Controller
     {
         $request->user()->savedPosts->loadExists([
             'bookmarks as bookmarked' => fn($query) =>
-            $query->where('user_id', $request->user()->id)
+            $query->where('user_id', $request->user()->id),
+            'requests as already_requested' => function ($query) use ($request) {
+                $query->where('user_id', $request->user()->id);
+                $query->where('status', 'Pendiente');
+            }
         ]);
 
 
@@ -75,6 +79,10 @@ class PostController extends Controller
         $posts = Post::query()->withExists([
             'savedByUsers as bookmarked' => function ($query) use ($request) {
                 $query->where('user_id', $request->user()->id);
+            },
+            'requests as already_requested' => function ($query) use ($request) {
+                $query->where('user_id', $request->user()->id);
+                $query->where('status', 'Pendiente');
             }
         ])->where('status', '!=', 'Resuelto')->latest();
 
@@ -115,6 +123,10 @@ class PostController extends Controller
         $posts = Post::query()->where('user_id', $request->user()->id)->withExists([
             'savedByUsers as bookmarked' => function ($query) use ($request) {
                 $query->where('user_id', $request->user()->id);
+            },
+            'requests as already_requested' => function ($query) use ($request) {
+                $query->where('user_id', $request->user()->id);
+                $query->where('status', 'Pendiente');
             }
         ])->latest();
 
@@ -176,7 +188,11 @@ class PostController extends Controller
     {
         $post->loadExists([
             'bookmarks as bookmarked' => fn($query) =>
-            $query->where('user_id', $request->user()->id)
+            $query->where('user_id', $request->user()->id),
+            'requests as already_requested' => function ($query) use ($request) {
+                $query->where('user_id', $request->user()->id);
+                $query->where('status', 'Pendiente');
+            }
         ]);
 
         return response()->json([
@@ -236,7 +252,7 @@ class PostController extends Controller
         $post->save();
 
 
-         return response()->json([
+        return response()->json([
             'message' => "Publicacion editada",
             'data' => $post->toResource(),
         ]);
